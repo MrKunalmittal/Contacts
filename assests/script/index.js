@@ -61,18 +61,17 @@ class Contact {
 
 'use strict';
 
-// import { Contacts } from './Contacts.js';
-// import { select , onEvent, getElement, print} from './utilis.js';
+
 
 const input = select('.input');
 const button = select('.btn');
 const saved = select('.info p');
 const storage = select('.storage p');
 const grid = select('.grid');
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailRegex = /^(?=^.{8,}$)[-_A-Za-z0-9]+([_.-][a-zA-Z0-9]+)*@[A-Za-z0-9]+([.-][a-zA-Z0-9]+)*\.[A-Za-z]{2,}$/;
 
-
-const contactArray = [];
+let newArray = [];
+let contactArray = [];
 
 onEvent('click', button, function() {
     event.preventDefault();
@@ -93,17 +92,17 @@ onEvent('click', button, function() {
 });
 
 function contactsList() {
-    // let data = input.value;
-    let cleanData = input.value.split(',');
+   
+    let cleanData = input.value.split(',').trim();
 
-    // let contact = new Contact(cleanData[0], cleanData[1], cleanData[2]);
+    
     if(cleanData.length === 3) {
         if(!emailRegex.test(cleanData[2])){
             storage.innerText = 'Enter valid email';
         } else {
 
             let contact = new Contact(cleanData[0], cleanData[1], cleanData[2]);
-            contactArray.unshift(contact);
+            contactArray.push(contact);
 
 
             let contactBox = document.createElement("div");
@@ -123,6 +122,11 @@ function contactsList() {
             email.innerText = `Email: ${contact.email}`;
             
             input.value ='';
+
+            onEvent('click',contactBox, function(){
+                contactBox.remove();
+                
+            });
         
         } 
     } else {
@@ -131,6 +135,12 @@ function contactsList() {
     
 }
 
+
 function contactCount() {
     saved.innerText = `Contacts added:${contactArray.length}`;
+}
+
+function updateCount() {
+    newArray.push(contactArray);
+
 }
