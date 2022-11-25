@@ -18,16 +18,13 @@ function select(selector,parent=document){
     return parent.querySelector(selector);
 }
 
-//print
-function print(arg){
- console.log(arg);
-}
+
 class Contact {
     #name;
     #city;
     #email;
 
-    constructor(name,city,email) {
+    constructor(name, city, email) {
         this.#name = name;
         this.#city = city;
         this.#email = email;
@@ -77,9 +74,9 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const contactArray = [];
 
-onEvent('click', button, function(){
+onEvent('click', button, function() {
     event.preventDefault();
-    if(contactArray < 15 && input.value !== ''){
+    if(contactArray.length < 10 && input.value !== ''){
         storage.innerText = "";
 
         contactsList();
@@ -87,16 +84,17 @@ onEvent('click', button, function(){
 
     } else if (input.value === ' ') {
         storage.innerText = 'Enter details to add !';
-    } else if(contactArray.length > 5) {
-        storage.innerText = ' Storage memory is full !';
+     } else if (contactArray.length >= 9) {
+         storage.innerText = ' Contacts memory is full !';
     } else {
-        storage.innerText = 'Invalid input';
+       
+        storage.innerText = ' Invalid Input !';
     }
 });
 
 function contactsList() {
     // let data = input.value;
-    let cleanData = input.value.split(', ');
+    let cleanData = input.value.split(',');
 
     // let contact = new Contact(cleanData[0], cleanData[1], cleanData[2]);
     if(cleanData.length === 3) {
@@ -105,7 +103,7 @@ function contactsList() {
         } else {
 
             let contact = new Contact(cleanData[0], cleanData[1], cleanData[2]);
-            contactArray.push(contact);
+            contactArray.unshift(contact);
 
 
             let contactBox = document.createElement("div");
@@ -114,15 +112,15 @@ function contactsList() {
     
             let name = document.createElement("p");
             contactBox.appendChild(name);
-            name.innerText = `Name:${contact.name}`;
+            name.innerText = `Name: ${contact.name}`;
     
             let city = document.createElement("p");
             contactBox.appendChild(city);
-            city.innerText = `City:${contact.city}`;
+            city.innerText = `City: ${contact.city}`;
     
             let email = document.createElement("p");
             contactBox.appendChild(email);
-            email.innerText = `Email:${contact.email}`;
+            email.innerText = `Email: ${contact.email}`;
             
             input.value ='';
         
@@ -134,5 +132,5 @@ function contactsList() {
 }
 
 function contactCount() {
-    saved.innerText = `contacts added:${contactArray.length}`;
+    saved.innerText = `Contacts added:${contactArray.length}`;
 }
