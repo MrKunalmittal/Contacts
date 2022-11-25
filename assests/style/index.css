@@ -75,7 +75,8 @@ h2 {
     margin-left: 30px;
     font-size: 20px;
     font-weight: 600;
-    transition: ease-in-out, background-color .25s ease-in-out;
+    color: black;
+    transition: ease-in-out, background-color , color .10s ease-in-out;
 }
 .btn:hover{
     background-color: darkgreen;
@@ -91,7 +92,7 @@ h2 {
 }
 .grid {
     color: #fff;
-    /* grid-template-columns: repeat(4, 150px); */
+    
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     gap: 1rem;
     display: grid;
@@ -131,4 +132,7 @@ h2 {
     background-color: lightslategray;
     
     
+}
+.box:hover{
+    border-style: ridge;
 }
