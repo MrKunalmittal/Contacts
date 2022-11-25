@@ -61,7 +61,8 @@ class Contact {
 
 'use strict';
 
-
+// import { Contacts } from './Contacts.js';
+// import { select , onEvent, getElement, print} from './utilis.js';
 
 const input = select('.input');
 const button = select('.btn');
@@ -93,7 +94,7 @@ onEvent('click', button, function() {
 
 function contactsList() {
    
-    let cleanData = input.value.split(',').trim();
+    let cleanData = input.value.split(',');
 
     
     if(cleanData.length === 3) {
@@ -125,6 +126,8 @@ function contactsList() {
 
             onEvent('click',contactBox, function(){
                 contactBox.remove();
+                saved.innerText = `Contacts added :${contactArray.length - 1} `;
+
                 
             });
         
